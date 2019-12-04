@@ -1,1 +1,1 @@
-from wf-cv-datetime-utils.core import *
+from cv_datetime_utils.core import *
