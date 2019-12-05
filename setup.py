@@ -1,23 +1,33 @@
-import setuptools
+import os
+from setuptools import setup, find_packages
 
-setuptools.setup(
-    name="cvutilities",
-    version="0.0.1",
-    author="Theodore Quinn",
-    author_email="ted.quinn@wildflowerschools.org",
-    license='MIT',
-    description="Miscellaneous helper functions for fetching and processing OpenPose data and camera calibration data",
-    url="https://github.com/WildflowerSchools/cvutilities",
-    packages=setuptools.find_packages(),
-    install_requires=[
-        'opencv-python>=3.4.1',
-        'numpy>=1.14',
-        'scipy>=1.1',
-        'pandas>=0.23',
-        'matplotlib>=2.2',
-        'networkx>=2.1',
-        'boto3>=1.7',
-        'python-dateutil>=2.7'],
-    classifiers=(
-        "Programming Language :: Python :: 3",
-        "Operating System :: OS Independent"))
+BASEDIR = os.path.dirname(os.path.abspath(__file__))
+VERSION = open(os.path.join(BASEDIR, 'VERSION')).read().strip()
+
+BASE_DEPENDENCIES = [
+    'pandas>=0.25',
+    'python-dateutil>=2.8'
+]
+
+# allow setup.py to be run from any path
+os.chdir(os.path.normpath(BASEDIR))
+
+setup(
+    name='wf-cv-datetime-utils',
+    packages=find_packages(),
+    version=VERSION,
+    include_package_data=True,
+    description='Miscellaneous utilities for working with datetimes when processing images',
+    long_description=open('README.md').read(),
+    url='https://github.com/WildflowerSchools/wf-cv-datetime-utils',
+    author='Theodore Quinn',
+    author_email='ted.quinn@wildflowerschools.org',
+    install_requires=BASE_DEPENDENCIES,
+    keywords=['cv', 'datetime'],
+    classifiers=[
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: MIT License',
+        'Operating System :: OS Independent',
+        'Programming Language :: Python',
+    ]
+)
